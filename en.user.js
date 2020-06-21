@@ -5,7 +5,8 @@
 // @description  Translate Bilibili UI texts
 // @author       swordfeng
 // @match        https://*.bilibili.com/*
-// @grant        GM_xmlhttpRequest
+// @resource     dict https://raw.githubusercontent.com/swordfeng/bilibili-translator/master/dict.json
+// @grant        GM_getResourceText
 // ==/UserScript==
 
 const lang = 'en';
@@ -41,12 +42,7 @@ function onLoadDict(dict) {
 (function() {
     'use strict';
 
-    GM_xmlhttpRequest({
-        method: 'GET',
-        url: 'https://raw.githubusercontent.com/swordfeng/bilibili-translator/master/dict.json',
-        responseType: 'json',
-        onload: xhr => {
-            onLoadDict(xhr.response);
-        }
-    });
+    const dict = JSON.parse(GM_getResourceText('dict'));
+    onLoadDict(dict);
 })();
+
